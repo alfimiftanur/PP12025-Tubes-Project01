@@ -1,6 +1,6 @@
-package tubes;
+package entity;
 
-public class test {
+public class Admin {
     public static void main(String[] args) {
         System.out.println("Test");
     }
