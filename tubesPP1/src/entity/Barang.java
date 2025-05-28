@@ -65,4 +65,5 @@ public class Barang {
     public void setNext(Barang next) {
         this.next = next;
     }
+
 }
