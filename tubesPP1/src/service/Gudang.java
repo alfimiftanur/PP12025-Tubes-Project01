@@ -59,4 +59,35 @@ public class Gudang {
             temp = temp.getNext();
         }
     }
+
+    public void hapusBarang() {
+        if (head == null) {
+            System.out.println("Tidak ada barang untuk dihapus.");
+            return;
+        }
+
+        System.out.print("Masukkan kode barang yang ingin dihapus: ");
+        String kode = sc.nextLine();
+
+        Barang temp = head;
+        Barang prev = null;
+
+        while (temp != null && !temp.getKode().equals(kode)) {
+            prev = temp;
+            temp = temp.getNext();
+        }
+
+        if (temp == null) {
+            System.out.println("Barang dengan kode " + kode + " tidak ditemukan.");
+            return;
+        }
+
+        if (prev == null) {
+            head = temp.getNext();
+        } else {
+            prev.setNext(temp.getNext());
+        }
+
+        System.out.println("Barang dengan kode " + kode + " berhasil dihapus.");
+    }
 }
