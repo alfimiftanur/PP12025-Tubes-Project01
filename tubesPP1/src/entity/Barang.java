@@ -8,7 +8,6 @@ public class Barang {
     private double harga;
     Barang next;
 
-    // Constructor
     public Barang(String kode, String nama, String jenis, int stok, double harga) {
         this.kode = kode;
         this.nama = nama;
@@ -17,7 +16,6 @@ public class Barang {
         this.harga = harga;
     }
 
-    // Getter dan Setter
     public String getKode() {
         return kode;
     }

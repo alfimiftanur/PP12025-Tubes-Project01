@@ -5,14 +5,12 @@ public class Admin {
     private String nama;
     private String password;
 
-    // Constructor
     public Admin(String id, String nama, String password) {
         this.id = id;
         this.nama = nama;
         this.password = password;
     }
 
-    // Getter dan Setter
     public String getId() {
         return id;
     }

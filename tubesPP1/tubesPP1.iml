@@ -7,5 +7,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="PP12025_tubes_project01" />
   </component>
 </module>

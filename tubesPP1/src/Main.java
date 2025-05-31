@@ -67,7 +67,7 @@ public class Main {
                     g.tampilkanBarang();
                     break;
                 case 3:
-//                    g.hapusBarang();
+                    g.hapusBarang();
                     break;
                 case 0:
                     System.out.println("Keluar dari menu gudang...");
