@@ -55,6 +55,7 @@ public class Main {
             System.out.println("2. Tampilkan Barang");
             System.out.println("3. Hapus Barang");
             System.out.println("4. Cari Barang");
+            System.out.println("5. Update Barang");
             System.out.println("0. Keluar ");
             System.out.print("Pilihan: ");
             pilihan = sc.nextInt();
@@ -71,7 +72,10 @@ public class Main {
                     g.hapusBarang();
                     break;
                 case 4:
-                g.cariBarang();
+                    g.cariBarang();
+                break;
+                case 5:
+                    g.updateBarang();
                 break;
                 case 0:
                     System.out.println("Keluar dari menu gudang...");
