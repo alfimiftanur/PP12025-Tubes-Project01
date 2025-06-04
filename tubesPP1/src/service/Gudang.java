@@ -6,7 +6,6 @@ public class Gudang {
     Barang head;
 
     Scanner sc = new Scanner(System.in);
-
     public void tambahBarang() {
         System.out.print("Kode barang: ");
         String kode = sc.nextLine();
@@ -37,6 +36,44 @@ public class Gudang {
 
         System.out.println("Barang berhasil ditambahkan!");
         System.out.println("----------------------");
+    }
+
+    public boolean isEmpty() {
+        return head == null;
+    }
+
+    public void tambahBarangAkhir() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Kode barang: ");
+        String kode = sc.nextLine();
+
+        System.out.print("Nama barang: ");
+        String nama = sc.nextLine();
+
+        System.out.print("Jenis barang: ");
+        String jenis = sc.nextLine();
+
+        System.out.print("Stok barang: ");
+        int stok = sc.nextInt();
+
+        System.out.print("Harga barang: Rp ");
+        double harga = sc.nextDouble();
+
+        Barang posBarang = null;
+        Barang curBarang = null;
+        Barang newBarang = new Barang(kode, nama, jenis, stok, harga);
+
+        if (isEmpty()) {
+            head = newBarang;
+        } else {
+            curBarang = head;
+            while (curBarang != null) {
+                posBarang = curBarang;
+                curBarang = curBarang.getNext();
+            }
+            posBarang.setNext(newBarang);
+        }
     }
 
     public void tampilkanBarang() {
@@ -119,19 +156,19 @@ public class Gudang {
     public void tambahBarangTengah() {
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Masukkan kode barang: ");
+        System.out.print("Kode barang: ");
         String kode = sc.nextLine();
 
-        System.out.print("Masukkan nama barang: ");
+        System.out.print("Nama barang: ");
         String nama = sc.nextLine();
 
-        System.out.print("Masukkan jenis barang: ");
+        System.out.print("Jenis barang: ");
         String jenis = sc.nextLine();
 
-        System.out.print("Masukkan stok barang: ");
+        System.out.print("Stok barang: ");
         int stok = sc.nextInt();
 
-        System.out.print("Masukkan harga barang: Rp ");
+        System.out.print("Harga barang: Rp ");
         double harga = sc.nextDouble();
 
         System.out.print("Masukkan posisi untuk menambahkan barang di tengah: ");
@@ -199,15 +236,12 @@ public class Gudang {
                     temp.setJenis(jenisBaru);
                 }
 
-                // Untuk stok dan harga, kita akan selalu meminta input baru
-                // atau bisa ditambahkan logika untuk skip jika input kosong (membutuhkan parsing dari String)
-                
                 int stokBaru = -1;
                 while (stokBaru < 0) {
                     System.out.print("Stok barang baru (" + temp.getStok() + "): ");
                     String inputStok = sc.nextLine();
-                    if (inputStok.trim().isEmpty()) { // Jika pengguna hanya menekan enter (tidak ingin mengubah)
-                        stokBaru = temp.getStok(); // Gunakan stok lama
+                    if (inputStok.trim().isEmpty()) {
+                        stokBaru = temp.getStok();
                         break; 
                     }
                     try {
@@ -219,7 +253,7 @@ public class Gudang {
                         }
                     } catch (NumberFormatException e) {
                         System.out.println("Input stok tidak valid. Masukkan angka atau kosongkan.");
-                        stokBaru = -1; // Set ulang agar loop berlanjut jika input salah
+                        stokBaru = -1;
                     }
                 }
 
@@ -228,8 +262,8 @@ public class Gudang {
                 while (hargaBaru < 0) {
                      System.out.print("Harga barang baru (Rp " + String.format("%,.2f", temp.getHarga()) + "): ");
                     String inputHarga = sc.nextLine();
-                    if (inputHarga.trim().isEmpty()) { // Jika pengguna hanya menekan enter
-                        hargaBaru = temp.getHarga(); // Gunakan harga lama
+                    if (inputHarga.trim().isEmpty()) {
+                        hargaBaru = temp.getHarga();
                         break;
                     }
                     try {
@@ -241,12 +275,12 @@ public class Gudang {
                         }
                     } catch (NumberFormatException e) {
                         System.out.println("Input harga tidak valid. Masukkan angka atau kosongkan.");
-                        hargaBaru = -1.0; // Set ulang
+                        hargaBaru = -1.0;
                     }
                 }
 
                 System.out.println("Barang berhasil diupdate!");
-                break; // Keluar dari loop while setelah update
+                break;
             }
             temp = temp.getNext();
         }

@@ -50,13 +50,14 @@ public class Main {
         int pilihan;
 
         do {
-            System.out.println("=== MENU GUDANG ===");
+            System.out.println("===== MENU GUDANG =====");
             System.out.println("1. Tambah Barang");
             System.out.println("2. Tambah Barang di Tengah");
-            System.out.println("3. Tampilkan Barang");
-            System.out.println("4. Hapus Barang");
-            System.out.println("5. Cari Barang");
-            System.out.println("6. Update Barang");
+            System.out.println("3. Tambah Barang di Akhir");
+            System.out.println("4. Tampilkan Barang");
+            System.out.println("5. Hapus Barang");
+            System.out.println("6. Cari Barang");
+            System.out.println("7. Update Barang");
             System.out.println("0. Keluar ");
             System.out.print("Pilihan: ");
             pilihan = sc.nextInt();
@@ -70,15 +71,18 @@ public class Main {
                     g.tambahBarangTengah();
                     break;
                 case 3:
-                    g.tampilkanBarang();
+                    g.tambahBarangAkhir();
                     break;
                 case 4:
-                    g.hapusBarang();
+                    g.tampilkanBarang();
                     break;
                 case 5:
+                    g.hapusBarang();
+                    break;
+                case 6:
                     g.cariBarang();
                 break;
-                case 6:
+                case 7:
                     g.updateBarang();
                 break;
                 case 0:
