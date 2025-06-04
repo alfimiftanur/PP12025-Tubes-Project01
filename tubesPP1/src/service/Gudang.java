@@ -74,6 +74,8 @@ public class Gudang {
             }
             posBarang.setNext(newBarang);
         }
+        System.out.println("Barang berhasil ditambahkan!");
+        System.out.println("----------------------");
     }
 
     public void tampilkanBarang() {
@@ -198,6 +200,8 @@ public class Gudang {
                 }
             }
         }
+        System.out.println("Barang berhasil ditambahkan!");
+        System.out.println("----------------------");
     }
 
     public void updateBarang() {
@@ -290,5 +294,18 @@ public class Gudang {
         }
         System.out.println("----------------------");
     }
+
+    public void insertDummy(Barang barang) {
+        if (head == null) {
+            head = barang;
+        } else {
+            Barang temp = head;
+            while (temp.getNext() != null) {
+                temp = temp.getNext();
+            }
+            temp.setNext(barang);
+        }
+    }
+
 
 }
