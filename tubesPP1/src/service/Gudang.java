@@ -7,7 +7,6 @@ public class Gudang {
 
     Scanner sc = new Scanner(System.in);
 
-
     public void tambahBarang() {
         System.out.print("Kode barang: ");
         String kode = sc.nextLine();
@@ -116,7 +115,55 @@ public class Gudang {
 
         System.out.println("Barang dengan kode " + kode + " tidak ditemukan.");
     }
-     public void updateBarang() {
+
+    public void tambahBarangTengah() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Masukkan kode barang: ");
+        String kode = sc.nextLine();
+
+        System.out.print("Masukkan nama barang: ");
+        String nama = sc.nextLine();
+
+        System.out.print("Masukkan jenis barang: ");
+        String jenis = sc.nextLine();
+
+        System.out.print("Masukkan stok barang: ");
+        int stok = sc.nextInt();
+
+        System.out.print("Masukkan harga barang: Rp ");
+        double harga = sc.nextDouble();
+
+        System.out.print("Masukkan posisi untuk menambahkan barang di tengah: ");
+        int posisi = sc.nextInt();
+
+        Barang posBarang = new Barang(kode, nama, jenis, stok, harga);
+        Barang curBarang;
+        int i = 1;
+
+        if (head == null) {
+            head = posBarang;
+        } else {
+            curBarang = head;
+            if (posisi == 1) {
+                posBarang.setNext(head);
+                head = posBarang;
+            } else {
+                while (curBarang != null && i < posisi - 1) {
+                    curBarang = curBarang.getNext();
+                    i++;
+                }
+                if (curBarang == null) {
+                    System.out.println("Posisi melebihi jumlah barang yang ada.");
+                } else {
+                    posBarang.setNext(curBarang.getNext());
+                    curBarang.setNext(posBarang);
+                }
+            }
+        }
+    }
+
+    public void updateBarang() {
         if (head == null) {
             System.out.println("Tidak ada barang di gudang untuk diupdate.");
             System.out.println("----------------------");
