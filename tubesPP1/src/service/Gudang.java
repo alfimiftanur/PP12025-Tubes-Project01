@@ -5,7 +5,7 @@ import java.io.*;
 
 public class Gudang {
     Barang head;
-    private final String FILE_NAME = "D:\\data\\data_barang.dat";
+    private final String FILE_NAME = "C:\\Users\\example\\OneDrive\\Desktop\\data_barang.dat";
     Scanner sc = new Scanner(System.in);
 
     public Gudang() {
@@ -253,7 +253,7 @@ public class Gudang {
                     String inputStok = sc.nextLine();
                     if (inputStok.trim().isEmpty()) {
                         stokBaru = temp.getStok();
-                        break; 
+                        break;
                     }
                     try {
                         stokBaru = Integer.parseInt(inputStok);
@@ -398,7 +398,6 @@ public class Gudang {
                 }
 
                 if (perluTukar) {
-                    // Tukar data barang
                     tempKode = current.getKode();
                     tempNama = current.getNama();
                     tempJenis = current.getJenis();

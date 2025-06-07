@@ -23,7 +23,7 @@ public class Main {
                 menuPilihan = Integer.parseInt(menu);
             } catch (NumberFormatException e) {
                 System.out.println("Input harus berupa angka. Silakan coba lagi.\n");
-                continue; // langsung ke awal loop tanpa lanjut ke switch
+                continue;
             }
 
             switch (menuPilihan) {
