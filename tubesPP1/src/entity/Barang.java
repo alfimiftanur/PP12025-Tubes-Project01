@@ -1,12 +1,16 @@
 package entity;
 
-public class Barang {
+import java.io.Serializable;
+
+public class Barang implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String kode;
     private String nama;
     private String jenis;
     private int stok;
     private double harga;
-    Barang next;
+    private transient Barang next;
+
 
     public Barang(String kode, String nama, String jenis, int stok, double harga) {
         this.kode = kode;
