@@ -1,11 +1,16 @@
 package service;
 import entity.Barang;
 import java.util.Scanner;
+import java.io.*;
 
 public class Gudang {
     Barang head;
-
+    private final String FILE_NAME = "D:\\data\\data_barang.dat";
     Scanner sc = new Scanner(System.in);
+
+    public Gudang() {
+        bacaDariFile();
+    }
     public void tambahBarang() {
         System.out.print("Kode barang: ");
         String kode = sc.nextLine();
@@ -24,6 +29,7 @@ public class Gudang {
         sc.nextLine();
 
         Barang baru = new Barang(kode, nama, jenis, stok, harga);
+
         if (head == null) {
             head = baru;
         } else {
@@ -34,6 +40,7 @@ public class Gudang {
             temp.setNext(baru);
         }
 
+        simpanKeFile();
         System.out.println("Barang berhasil ditambahkan!");
         System.out.println("----------------------");
     }
@@ -283,8 +290,9 @@ public class Gudang {
                     }
                 }
 
-                System.out.println("Barang berhasil diupdate!");
-                break;
+                simpanKeFile();
+                System.out.println("Barang berhasil diupdate.");
+                return;
             }
             temp = temp.getNext();
         }
@@ -417,6 +425,47 @@ public class Gudang {
 
         System.out.println("Barang berhasil diurutkan berdasarkan " + tipeUrut +
                 (ascending ? " (naik)." : " (menurun)."));
+    }
+
+    public void simpanKeFile() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
+            Barang current = head;
+            while (current != null) {
+                oos.writeObject(current);
+                current = current.getNext();
+            }
+        } catch (IOException e) {
+            System.out.println("Gagal menyimpan data: " + e.getMessage());
+        }
+    }
+
+    public void bacaDariFile() {
+        File file = new File(FILE_NAME);
+        if (!file.exists()) return;
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            head = null;
+            Barang prev = null;
+
+            while (true) {
+                try {
+                    Barang b = (Barang) ois.readObject();
+                    b.setNext(null);
+                    if (head == null) {
+                        head = b;
+                        prev = b;
+                    } else {
+                        prev.setNext(b);
+                        prev = b;
+                    }
+                } catch (EOFException e) {
+                    break;
+                }
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Gagal membaca file: " + e.getMessage());
+        }
     }
 
 }
