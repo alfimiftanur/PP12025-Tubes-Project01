@@ -347,4 +347,76 @@ public class Gudang {
         System.out.println("Barang terakhir berhasil dihapus.");
     }
 
+    public void sortingBarang(String tipeUrut, boolean ascending) {
+        if (head == null) {
+            System.out.println("Tidak ada barang untuk diurutkan.");
+            return;
+        }
+
+        Barang current = head;
+        Barang index = null;
+        String tempKode, tempNama, tempJenis;
+        int tempStok;
+        double tempHarga;
+
+        while (current != null) {
+            index = current.getNext();
+            while (index != null) {
+                boolean perluTukar = false;
+
+                if (tipeUrut.equalsIgnoreCase("kode")) {
+                    perluTukar = ascending
+                            ? current.getKode().compareTo(index.getKode()) > 0
+                            : current.getKode().compareTo(index.getKode()) < 0;
+                } else if (tipeUrut.equalsIgnoreCase("nama")) {
+                    perluTukar = ascending
+                            ? current.getNama().compareTo(index.getNama()) > 0
+                            : current.getNama().compareTo(index.getNama()) < 0;
+                } else if (tipeUrut.equalsIgnoreCase("jenis")) {
+                    perluTukar = ascending
+                            ? current.getJenis().compareTo(index.getJenis()) > 0
+                            : current.getJenis().compareTo(index.getJenis()) < 0;
+                } else if (tipeUrut.equalsIgnoreCase("stok")) {
+                    perluTukar = ascending
+                            ? current.getStok() > index.getStok()
+                            : current.getStok() < index.getStok();
+                } else if (tipeUrut.equalsIgnoreCase("harga")) {
+                    perluTukar = ascending
+                            ? current.getHarga() > index.getHarga()
+                            : current.getHarga() < index.getHarga();
+                } else {
+                    System.out.println("Tipe pengurutan tidak dikenali.");
+                    return;
+                }
+
+                if (perluTukar) {
+                    // Tukar data barang
+                    tempKode = current.getKode();
+                    tempNama = current.getNama();
+                    tempJenis = current.getJenis();
+                    tempStok = current.getStok();
+                    tempHarga = current.getHarga();
+
+                    current.setKode(index.getKode());
+                    current.setNama(index.getNama());
+                    current.setJenis(index.getJenis());
+                    current.setStok(index.getStok());
+                    current.setHarga(index.getHarga());
+
+                    index.setKode(tempKode);
+                    index.setNama(tempNama);
+                    index.setJenis(tempJenis);
+                    index.setStok(tempStok);
+                    index.setHarga(tempHarga);
+                }
+
+                index = index.getNext();
+            }
+            current = current.getNext();
+        }
+
+        System.out.println("Barang berhasil diurutkan berdasarkan " + tipeUrut +
+                (ascending ? " (naik)." : " (menurun)."));
+    }
+
 }

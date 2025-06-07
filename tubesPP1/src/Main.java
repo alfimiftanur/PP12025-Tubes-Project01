@@ -7,6 +7,7 @@ public class Main {
         Auth authService = new Auth();
         Scanner sc = new Scanner(System.in);
         boolean isLoggedIn = false;
+        int maxTrys = 3;
 
         System.out.println("=== SISTEM LOGIN ===");
         while (!isLoggedIn) {
@@ -17,27 +18,48 @@ public class Main {
             System.out.print("Pilih: ");
             String menu = sc.nextLine();
 
-            switch (menu) {
-                case "1":
+            int menuPilihan;
+            try {
+                menuPilihan = Integer.parseInt(menu);
+            } catch (NumberFormatException e) {
+                System.out.println("Input harus berupa angka. Silakan coba lagi.\n");
+                continue; // langsung ke awal loop tanpa lanjut ke switch
+            }
+
+            switch (menuPilihan) {
+                case 1:
                     System.out.print("ID: ");
                     String id = sc.nextLine();
                     System.out.print("Password: ");
                     String password = sc.nextLine();
 
-                    if (authService.login(id, password)) {
-                        System.out.println("Login berhasil!\n");
-                        isLoggedIn = true;
-                    } else {
-                        System.out.println("ID atau password salah.\n");
+                    for (int i = 0; i < maxTrys; i++) {
+                        if (authService.login(id, password)) {
+                            System.out.println("Login berhasil!\n");
+                            isLoggedIn = true;
+                            break;
+                        } else {
+                            if (i < maxTrys - 1) {
+                                System.out.println("ID atau password salah. Coba lagi (" + (maxTrys - i - 1) + " percobaan tersisa).\n");
+                                System.out.print("ID: ");
+                                id = sc.nextLine();
+                                System.out.print("Password: ");
+                                password = sc.nextLine();
+                            } else {
+                                System.out.println("Anda telah mencoba " + maxTrys + " kali. Program akan keluar.");
+                                System.exit(0);
+                            }
+                        }
                     }
+
                     break;
-                case "2":
+                case 2:
                     authService.register();
                     break;
-                case "3":
+                case 3:
                     authService.tampilkanAdmin();
                     break;
-                case "0":
+                case 0:
                     System.out.println("Keluar dari program...");
                     System.exit(0);
                     break;
@@ -47,7 +69,7 @@ public class Main {
         }
 
         Gudang g = new Gudang();
-        int pilihan;
+        int menuPilihanB = -1;
 
         do {
             System.out.println("===== MENU GUDANG =====");
@@ -55,17 +77,24 @@ public class Main {
             System.out.println("2. Tambah Barang di Tengah");
             System.out.println("3. Tambah Barang di Akhir");
             System.out.println("4. Tampilkan Barang");
-            System.out.println("5. Hapus Barang");
-            System.out.println("6. Hapus Barang di Tengah");
-            System.out.println("7. Hapus Barang di Akhir");
-            System.out.println("8. Cari Barang");
-            System.out.println("9. Update Barang");
+            System.out.println("5. Urutkan Barang");
+            System.out.println("6. Hapus Barang");
+            System.out.println("7. Hapus Barang di Tengah");
+            System.out.println("8. Hapus Barang di Akhir");
+            System.out.println("9. Cari Barang");
+            System.out.println("10. Update Barang");
             System.out.println("0. Keluar ");
             System.out.print("Pilihan: ");
-            pilihan = sc.nextInt();
-            sc.nextLine();
+            String pilihan = sc.nextLine();
 
-            switch (pilihan) {
+            try {
+                menuPilihanB = Integer.parseInt(pilihan);
+            } catch (NumberFormatException e) {
+                System.out.println("Input harus berupa angka. Silakan coba lagi.\n");
+                menuPilihanB = -1;
+            }
+
+            switch (menuPilihanB) {
                 case 1:
                     g.tambahBarang();
                     break;
@@ -79,20 +108,30 @@ public class Main {
                     g.tampilkanBarang();
                     break;
                 case 5:
-                    g.hapusBarang();
+                    System.out.print("Urut berdasarkan apa? (kode/nama/jenis/stok/harga): ");
+                    String tipe = sc.nextLine().toLowerCase();
+                    System.out.print("Urutan (asc/desc): ");
+                    String urutan = sc.nextLine().toLowerCase();
+
+                    boolean ascending = urutan.equals("asc");
+                    g.sortingBarang(tipe, ascending);
+                    g.tampilkanBarang();
                     break;
                 case 6:
-                    g.hapusBarangTengah();
+                    g.hapusBarang();
                     break;
                 case 7:
-                    g.hapusBarangTerakhir();
+                    g.hapusBarangTengah();
                     break;
                 case 8:
-                    g.cariBarang();
-                break;
+                    g.hapusBarangTerakhir();
+                    break;
                 case 9:
+                    g.cariBarang();
+                    break;
+                case 10:
                     g.updateBarang();
-                break;
+                    break;
                 case 0:
                     System.out.println("Keluar dari menu gudang...");
                     break;
@@ -100,7 +139,7 @@ public class Main {
                     System.out.println("Pilihan Tidak Tersedia!");
             }
             System.out.println();
-        } while (pilihan != 0);
+        } while (menuPilihanB != 0);
 
         sc.close();
     }
