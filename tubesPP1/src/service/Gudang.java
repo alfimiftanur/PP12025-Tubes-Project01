@@ -5,7 +5,7 @@ import java.io.*;
 
 public class Gudang {
     Barang head;
-    private final String FILE_NAME = "C:\\Users\\example\\OneDrive\\Desktop\\admin.dat";
+    private final String FILE_NAME = "C:\\Users\\example\\OneDrive\\Desktop\\data_barang.dat";
     Scanner sc = new Scanner(System.in);
 
     public Gudang() {
