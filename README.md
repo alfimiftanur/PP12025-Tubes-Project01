@@ -29,23 +29,23 @@ Jika menggunakan Git:
 ```bash
 git clone https://github.com/alfimiftanur/PP12025-Tubes-Project01
 ```
-2. Buka Proyek di IDE
+### 2. Buka Proyek di IDE
 - Buka NetBeans / IntelliJ / Eclipse
 - Pilih menu Open Project atau Import Project
 - Arahkan ke folder hasil clone atau ekstraksi
 
-3. Kompilasi dan Jalankan
+### 3. Kompilasi dan Jalankan
 - Jalankan file Main.java
 - Ikuti menu navigasi yang muncul pada terminal
 
-4. Penyimpanan Data
+### 4. Penyimpanan Data
 - Data akan disimpan secara otomatis dalam file data_barang.dat menggunakan path relatif:
 ./data/data_barang.dat ```path bisa disesuaikan```
 
-Struktur Data
+## Struktur Data
 - Aplikasi ini menggunakan linked list untuk menyimpan data barang, sehingga operasi penambahan, penghapusan, dan pencarian dapat dilakukan secara dinamis tanpa batasan ukuran array.
 
-Pengembang
+## Pengembang
 1. 233040013 - Alfi Mifta Nurhakim
 2. 233040028 - Aufa Ramadhan
 3. 233040020 - Hilman Zaldi
