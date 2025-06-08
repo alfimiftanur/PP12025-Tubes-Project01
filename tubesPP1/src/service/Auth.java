@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Auth {
     private List<Admin> users = new ArrayList<>();
-    private final String FILE_NAME = "D:\\data\\admin.dat";
+    private final String FILE_NAME = "C:\\Users\\example\\OneDrive\\Desktop\\admin.dat";
     private Scanner scanner = new Scanner(System.in);
 
 
